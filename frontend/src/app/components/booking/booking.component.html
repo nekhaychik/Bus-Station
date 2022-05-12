@@ -1,0 +1,29 @@
+<ng-container *ngFor="let ticket of tickets; let indexOfelement=index">
+  <div class="ticket">
+    <div class="ticket__container">
+      <div class="ticket-route">
+        <div class="ticket-from">
+          <p>From</p>
+          <p>{{ ticket.placeFrom }}</p>
+        </div>
+        <div class="ticket-from">
+          <p>To</p>
+          <p>{{ ticket.placeTo }}</p>
+        </div>
+      </div>
+      <div class="ticket-date">
+        <div>{{ getStringDate(ticket.date.seconds) }}</div>
+        <div>{{ getStringTime(ticket.date.seconds) }}</div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button
+        color="accent"
+        (click)="cancel(ticket, indexOfelement)"
+        mat-raised-button
+      >
+        <span>Cancel</span>
+      </button>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,32 @@
+.ticket {
+  display: flex;
+  grid-gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.ticket__container {
+  width: 50%;
+  border: 2px solid rgb(255, 103, 128);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  color: -webkit-link;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-route {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  border-right: 1px solid grey;
+}
+
+.ticket-date {
+  padding-left: 16px;
+  border-left: 1px solid grey;
+}

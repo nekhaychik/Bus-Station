@@ -1,0 +1,15 @@
+<form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="John" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="80291234567" formControlName="phone">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" placeholder="" formControlName="hash">
+  </mat-form-field>
+  <button color="accent" [disabled]="!signupForm.valid" mat-raised-button type="submit"><span>Sign Up</span></button>
+</form>

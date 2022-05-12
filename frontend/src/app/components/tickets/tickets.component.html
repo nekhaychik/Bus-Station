@@ -1,0 +1,202 @@
+<button
+  *ngIf="userStatus == '11'"
+  color="accent"
+  (click)="showAll()"
+  mat-raised-button
+  class="show-button"
+>
+  <span>Show All</span>
+</button>
+
+<button
+  *ngIf="userStatus == '11'"
+  color="accent"
+  (click)="showCreateForm()"
+  mat-raised-button
+>
+  <span>Create Ticket</span>
+</button>
+
+<form
+  [formGroup]="createForm"
+  class="creating-form"
+  id="createForm"
+  style="display: none"
+>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <input matInput placeholder="active" formControlName="statusCr" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>From</mat-label>
+    <input matInput placeholder="Minsk" formControlName="placeFromCr" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>To</mat-label>
+    <input matInput placeholder="Grodno" formControlName="placeToCr" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      placeholder="MM/DD/YYYY"
+      [matDatepicker]="picker"
+      formControlName="dateCr"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>To</mat-label>
+    <input matInput placeholder="10" formControlName="numberOfSeatsCr" />
+  </mat-form-field>
+
+  <button
+    color="accent"
+    [disabled]="!createForm.valid"
+    mat-raised-button
+    type="submit"
+    (click)="submitCreatingForm()"
+  >
+    <span>Create</span>
+  </button>
+</form>
+
+<form [formGroup]="searchForm">
+  <mat-form-field>
+    <mat-label>From</mat-label>
+    <input matInput placeholder="Minsk" formControlName="placeFrom" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>To</mat-label>
+    <input matInput placeholder="Grodno" formControlName="placeTo" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      placeholder="MM/DD/YYYY"
+      [matDatepicker]="picker2"
+      formControlName="date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <button
+    color="accent"
+    [disabled]="!searchForm.valid"
+    mat-raised-button
+    type="submit"
+    (click)="submitForm()"
+  >
+    <span>Search</span>
+  </button>
+</form>
+
+<ng-container *ngIf="isFiltered">
+  <ng-container *ngFor="let ticket of tickets">
+    <div class="ticket">
+      <div class="ticket__container">
+        <div class="ticket-route">
+          <div class="ticket-from">
+            <p>From</p>
+            <p>{{ ticket.placeFrom }}</p>
+          </div>
+          <div class="ticket-from">
+            <p>To</p>
+            <p>{{ ticket.placeTo }}</p>
+          </div>
+        </div>
+        <div class="ticket-places">
+          <p>{{ ticket.numberOfSeats }} seats left</p>
+        </div>
+        <div class="ticket-date">
+          <div>{{ getStringDate(ticket.date.seconds) }}</div>
+          <div>{{ getStringTime(ticket.date.seconds) }}</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button
+        *ngIf="ticket.numberOfSeats > 0"
+          color="accent"
+          (click)="bookingTheTicket(ticket)"
+          mat-raised-button
+        >
+          <span>Book the ticket</span>
+        </button>
+        <button
+          *ngIf="userStatus == '11'"
+          color="accent"
+          (click)="showUpdateForm()"
+          mat-raised-button
+        >
+          <span>Update</span>
+        </button>
+        <button
+          *ngIf="userStatus == '11'"
+          color="accent"
+          (click)="deleteTicket(ticket)"
+          mat-raised-button
+        >
+          <span>Delete</span>
+        </button>
+      </div>
+    </div>
+
+    <form
+      [formGroup]="updateForm"
+      class="updating-form"
+      id="updateForm"
+      style="display: none"
+    >
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <input matInput placeholder="active" formControlName="statusUp" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>From</mat-label>
+        <input matInput placeholder="Minsk" formControlName="placeFromUp" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>To</mat-label>
+        <input matInput placeholder="Grodno" formControlName="placeToUp" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          placeholder="MM/DD/YYYY"
+          [matDatepicker]="picker"
+          formControlName="dateUp"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>To</mat-label>
+        <input matInput placeholder="10" formControlName="numberOfSeatsUp" />
+      </mat-form-field>
+
+      <button
+        color="accent"
+        [disabled]="!updateForm.valid"
+        mat-raised-button
+        type="submit"
+        (click)="submitUpdatingForm(ticket)"
+      >
+        <span>Update</span>
+      </button>
+    </form>
+  </ng-container>
+</ng-container>
